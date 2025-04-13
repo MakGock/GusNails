@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<!-- saved from url=(0012)about:srcdoc -->
+<html lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nail Studio - Запись на маникюр</title>
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .calendar-day {
+            transition: all 0.2s ease;
+        }
+        .calendar-day:hover:not(.disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .time-slot {
+            transition: all 0.2s ease;
+        }
+        .time-slot:hover:not(.booked):not(.buffer) {
+            background-color: #f3f4f6;
+            transform: scale(1.02);
+        }
+        .service-card {
+            transition: all 0.2s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .master-card {
+            transition: all 0.2s ease;
+        }
+        .master-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #ec4899;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width: 640px){.container{max-width:640px}}@media (min-width: 768px){.container{max-width:768px}}@media (min-width: 1024px){.container{max-width:1024px}}@media (min-width: 1280px){.container{max-width:1280px}}@media (min-width: 1536px){.container{max-width:1536px}}.sticky{position:sticky}.top-4{top:1rem}.mx-auto{margin-left:auto;margin-right:auto}.mb-12{margin-bottom:3rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.ml-1{margin-left:0.25rem}.mt-1{margin-top:0.25rem}.mt-4{margin-top:1rem}.mt-8{margin-top:2rem}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-16{height:4rem}.w-16{width:4rem}.w-full{width:100%}.max-w-md{max-width:28rem}.cursor-pointer{cursor:pointer}.grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.grid-cols-7{grid-template-columns:repeat(7, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:0.25rem}.gap-2{gap:0.5rem}.gap-8{gap:2rem}.space-x-2 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.5rem * var(--tw-space-x-reverse));margin-left:calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-4 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1rem * var(--tw-space-x-reverse));margin-left:calc(1rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-8 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(2rem * var(--tw-space-x-reverse));margin-left:calc(2rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded{border-radius:0.25rem}.border{border-width:1px}.border-t{border-top-width:1px}.border-gray-200{--tw-border-opacity:1;border-color:rgb(229 231 235 / var(--tw-border-opacity, 1))}.border-gray-700{--tw-border-opacity:1;border-color:rgb(55 65 81 / var(--tw-border-opacity, 1))}.bg-gray-800{--tw-bg-opacity:1;background-color:rgb(31 41 55 / var(--tw-bg-opacity, 1))}.bg-pink-50{--tw-bg-opacity:1;background-color:rgb(253 242 248 / var(--tw-bg-opacity, 1))}.bg-pink-500{--tw-bg-opacity:1;background-color:rgb(236 72 153 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-gray-100{--tw-bg-opacity:1;background-color:rgb(243 244 246 / var(--tw-bg-opacity, 1))}.bg-pink-100{--tw-bg-opacity:1;background-color:rgb(252 231 243 / var(--tw-bg-opacity, 1))}.bg-yellow-50{--tw-bg-opacity:1;background-color:rgb(254 252 232 / var(--tw-bg-opacity, 1))}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-pink-100{--tw-gradient-from:#fce7f3 var(--tw-gradient-from-position);--tw-gradient-to:rgb(252 231 243 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.to-purple-100{--tw-gradient-to:#f3e8ff var(--tw-gradient-to-position)}.object-cover{object-fit:cover}.p-4{padding:1rem}.p-6{padding:1.5rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-12{padding-top:3rem;padding-bottom:3rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-8{padding-top:2rem;padding-bottom:2rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.pt-6{padding-top:1.5rem}.text-center{text-align:center}.font-sans{font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-semibold{font-weight:600}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity, 1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity, 1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity, 1))}.text-gray-700{--tw-text-opacity:1;color:rgb(55 65 81 / var(--tw-text-opacity, 1))}.text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55 / var(--tw-text-opacity, 1))}.text-pink-400{--tw-text-opacity:1;color:rgb(244 114 182 / var(--tw-text-opacity, 1))}.text-pink-500{--tw-text-opacity:1;color:rgb(236 72 153 / var(--tw-text-opacity, 1))}.text-pink-600{--tw-text-opacity:1;color:rgb(219 39 119 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-yellow-400{--tw-text-opacity:1;color:rgb(250 204 21 / var(--tw-text-opacity, 1))}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.hover\:border-pink-300:hover{--tw-border-opacity:1;border-color:rgb(249 168 212 / var(--tw-border-opacity, 1))}.hover\:bg-pink-600:hover{--tw-bg-opacity:1;background-color:rgb(219 39 119 / var(--tw-bg-opacity, 1))}.hover\:text-pink-400:hover{--tw-text-opacity:1;color:rgb(244 114 182 / var(--tw-text-opacity, 1))}.hover\:text-pink-500:hover{--tw-text-opacity:1;color:rgb(236 72 153 / var(--tw-text-opacity, 1))}.disabled\:opacity-50:disabled{opacity:0.5}@media (min-width: 768px){.md\:mb-0{margin-bottom:0px}.md\:flex{display:flex}.md\:hidden{display:none}.md\:w-1\/2{width:50%}.md\:flex-row{flex-direction:row}}@media (min-width: 1024px){.lg\:w-1\/3{width:33.333333%}.lg\:flex-row{flex-direction:row}}</style></head>
+<body class="bg-pink-50 font-sans">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-hand-sparkles text-3xl text-pink-500"></i>
+                <h1 class="text-2xl font-bold text-pink-600">Nail Studio</h1>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="https://enzostvs-deepsite.hf.space/#" class="nav-link text-gray-700 hover:text-pink-500">Главная</a>
+                <a href="https://enzostvs-deepsite.hf.space/#" class="nav-link text-gray-700 hover:text-pink-500">Услуги</a>
+                <a href="https://enzostvs-deepsite.hf.space/#" class="nav-link text-gray-700 hover:text-pink-500">Портфолио</a>
+                <a href="https://enzostvs-deepsite.hf.space/#" class="nav-link text-gray-700 hover:text-pink-500">Контакты</a>
+            </nav>
+            <button class="md:hidden text-gray-700">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-pink-100 to-purple-100 py-12">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Профессиональный маникюр в нашем салоне</h2>
+                <p class="text-gray-600 mb-6">Запишитесь онлайн и получите 10% скидку на первый визит!</p>
+                <button class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-full shadow-lg transition duration-300">
+                    Записаться онлайн
+                </button>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <img src="https://avatars.mds.yandex.net/get-altay/13797017/2a0000019054c7d58e183a3cccf3edd5ae8c/XXXL" alt="Маникюр" class="rounded-lg shadow-xl w-full max-w-md">
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Запись на прием</h2>
+            
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Masters -->
+                <div class="lg:w-1/3">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4">Выберите мастера</h3>
+                    <div class="space-y-4 mb-6">
+                        <div class="master-card bg-white p-4 rounded-lg border border-gray-200 cursor-pointer hover:border-pink-300">
+                            <div class="flex items-center space-x-4">
+                                <img src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=880&amp;q=80" alt="Мастер Елена" class="w-16 h-16 rounded-full object-cover">
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Елена</h4>
+                                    <p class="text-gray-600 text-sm">Специалист по наращиванию</p>
+                                    <div class="flex mt-1">
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        <i class="fas fa-star-half-alt text-yellow-400 text-xs"></i>
+                                        <span class="text-gray-500 text-xs ml-1">(87)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="master-card bg-white p-4 rounded-lg border border-gray-200 cursor-pointer hover:border-pink-300">
+                            <div class="flex items-center space-x-4">
+                                <img src="https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80" alt="Мастер Ольга" class="w-16 h-16 rounded-full object-cover">
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Ольга</h4>
+                                    <p class="text-gray-600 text-sm">Эксперт по аппаратному маникюру</p>
+                                    <div class="flex mt-1">
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        <span class="text-gray-500 text-xs ml-1">(156)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Services -->
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4">Выберите услугу</h3>
+                    <div class="space-y-4">
+                        <div class="service-card bg-white p-4 rounded-lg border border-gray-200 cursor-pointer hover:border-pink-300">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Классический маникюр</h4>
+                                    <p class="text-gray-600 text-sm">Обрезной маникюр с покрытием</p>
+                                </div>
+                                <span class="font-bold text-pink-500">1 500 ₽</span>
+                            </div>
+                        </div>
+                        <div class="service-card bg-white p-4 rounded-lg border border-gray-200 cursor-pointer hover:border-pink-300">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Аппаратный маникюр</h4>
+                                    <p class="text-gray-600 text-sm">Без использования ножниц</p>
+                                </div>
+                                <span class="font-bold text-pink-500">1 800 ₽</span>
+                            </div>
+                        </div>
+                        <div class="service-card bg-white p-4 rounded-lg border border-gray-200 cursor-pointer hover:border-pink-300">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Наращивание ногтей</h4>
+                                    <p class="text-gray-600 text-sm">Гелевое наращивание с дизайном</p>
+                                </div>
+                                <span class="font-bold text-pink-500">3 200 ₽</span>
+                            </div>
+                        </div>
+                        <div class="service-card bg-white p-4 rounded-lg border border-gray-200 cursor-pointer hover:border-pink-300">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Покрытие гель-лаком</h4>
+                                    <p class="text-gray-600 text-sm">Стойкое покрытие на 2-3 недели</p>
+                                </div>
+                                <span class="font-bold text-pink-500">1 900 ₽</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Calendar -->
+                <div class="lg:w-1/3">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4">Выберите дату</h3>
+                    <div class="bg-white p-4 rounded-lg shadow-sm mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <button id="prev-month" class="text-gray-600 hover:text-pink-500">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <h4 id="current-month" class="font-semibold text-gray-800">Апрель 2025</h4>
+                            <button id="next-month" class="text-gray-600 hover:text-pink-500">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-7 gap-1 mb-2">
+                            <div class="text-center text-xs font-semibold text-gray-500">Пн</div>
+                            <div class="text-center text-xs font-semibold text-gray-500">Вт</div>
+                            <div class="text-center text-xs font-semibold text-gray-500">Ср</div>
+                            <div class="text-center text-xs font-semibold text-gray-500">Чт</div>
+                            <div class="text-center text-xs font-semibold text-gray-500">Пт</div>
+                            <div class="text-center text-xs font-semibold text-gray-500">Сб</div>
+                            <div class="text-center text-xs font-semibold text-gray-500">Вс</div>
+                        </div>
+                        <div id="calendar-days" class="grid grid-cols-7 gap-1"><div class="calendar-day text-center py-2 text-gray-400 disabled">31</div><div class="calendar-day text-center py-2 rounded-full text-gray-400 disabled">1</div><div class="calendar-day text-center py-2 rounded-full text-gray-400 disabled">2</div><div class="calendar-day text-center py-2 rounded-full text-gray-400 disabled">3</div><div class="calendar-day text-center py-2 rounded-full text-gray-400 disabled">4</div><div class="calendar-day text-center py-2 rounded-full text-gray-400 disabled">5</div><div class="calendar-day text-center py-2 rounded-full text-gray-400 disabled">6</div><div class="calendar-day text-center py-2 rounded-full text-gray-400 disabled">7</div><div class="calendar-day text-center py-2 rounded-full text-gray-400 disabled">8</div><div class="calendar-day text-center py-2 rounded-full text-gray-400 disabled">9</div><div class="calendar-day text-center py-2 rounded-full text-gray-400 disabled">10</div><div class="calendar-day text-center py-2 rounded-full text-gray-400 disabled">11</div><div class="calendar-day text-center py-2 rounded-full text-gray-400 disabled">12</div><div class="calendar-day text-center py-2 rounded-full bg-pink-100 font-semibold text-gray-400 disabled">13</div><div class="calendar-day text-center py-2 cursor-pointer rounded-full bg-pink-500 text-white">14</div><div class="calendar-day text-center py-2 cursor-pointer rounded-full">15</div><div class="calendar-day text-center py-2 cursor-pointer rounded-full">16</div><div class="calendar-day text-center py-2 cursor-pointer rounded-full">17</div><div class="calendar-day text-center py-2 cursor-pointer rounded-full">18</div><div class="calendar-day text-center py-2 cursor-pointer rounded-full">19</div><div class="calendar-day text-center py-2 cursor-pointer rounded-full">20</div><div class="calendar-day text-center py-2 cursor-pointer rounded-full">21</div><div class="calendar-day text-center py-2 cursor-pointer rounded-full">22</div><div class="calendar-day text-center py-2 cursor-pointer rounded-full">23</div><div class="calendar-day text-center py-2 cursor-pointer rounded-full">24</div><div class="calendar-day text-center py-2 cursor-pointer rounded-full">25</div><div class="calendar-day text-center py-2 cursor-pointer rounded-full">26</div><div class="calendar-day text-center py-2 cursor-pointer rounded-full">27</div><div class="calendar-day text-center py-2 cursor-pointer rounded-full">28</div><div class="calendar-day text-center py-2 cursor-pointer rounded-full">29</div><div class="calendar-day text-center py-2 cursor-pointer rounded-full">30</div><div class="calendar-day text-center py-2 cursor-pointer rounded-full">1</div><div class="calendar-day text-center py-2 cursor-pointer rounded-full">2</div><div class="calendar-day text-center py-2 cursor-pointer rounded-full">3</div><div class="calendar-day text-center py-2 cursor-pointer rounded-full">4</div></div>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <h4 class="font-semibold text-gray-800 mb-3">Выбранная дата: <span id="selected-date" class="text-pink-500">14.4.2025</span></h4>
+                        <h4 class="font-semibold text-gray-800 mb-3">Доступное время:</h4>
+                        <div id="time-slots" class="grid grid-cols-3 gap-2"><div class="time-slot text-center py-2 rounded border border-gray-200 cursor-pointer">10:00</div><div class="time-slot text-center py-2 rounded border border-gray-200 cursor-pointer">10:30</div><div class="time-slot text-center py-2 rounded border border-gray-200 cursor-pointer">11:00</div><div class="time-slot text-center py-2 rounded border border-gray-200 buffer bg-yellow-50 text-gray-400">11:30<div class="text-xs mt-1">Перерыв</div></div><div class="time-slot text-center py-2 rounded border border-gray-200 cursor-pointer">12:00</div><div class="time-slot text-center py-2 rounded border border-gray-200 cursor-pointer">12:30</div><div class="time-slot text-center py-2 rounded border border-gray-200 cursor-pointer">13:00</div><div class="time-slot text-center py-2 rounded border border-gray-200 buffer bg-yellow-50 text-gray-400">13:30<div class="text-xs mt-1">Перерыв</div></div><div class="time-slot text-center py-2 rounded border border-gray-200 cursor-pointer">14:00</div><div class="time-slot text-center py-2 rounded border border-gray-200 cursor-pointer">14:30</div><div class="time-slot text-center py-2 rounded border border-gray-200 booked bg-gray-100 text-gray-400">15:00<div class="text-xs mt-1">Занято</div></div><div class="time-slot text-center py-2 rounded border border-gray-200 cursor-pointer">15:30</div><div class="time-slot text-center py-2 rounded border border-gray-200 cursor-pointer">16:00</div><div class="time-slot text-center py-2 rounded border border-gray-200 booked bg-gray-100 text-gray-400">16:30<div class="text-xs mt-1">Занято</div></div><div class="time-slot text-center py-2 rounded border border-gray-200 cursor-pointer">17:00</div><div class="time-slot text-center py-2 rounded border border-gray-200 cursor-pointer">17:30</div><div class="time-slot text-center py-2 rounded border border-gray-200 booked bg-gray-100 text-gray-400">18:00<div class="text-xs mt-1">Занято</div></div><div class="time-slot text-center py-2 rounded border border-gray-200 cursor-pointer">18:30</div><div class="time-slot text-center py-2 rounded border border-gray-200 cursor-pointer">19:00</div><div class="time-slot text-center py-2 rounded border border-gray-200 cursor-pointer">19:30</div><div class="time-slot text-center py-2 rounded border border-gray-200 booked bg-gray-100 text-gray-400">20:00<div class="text-xs mt-1">Занято</div></div></div>
+                    </div>
+                </div>
+                
+                <!-- Booking Summary -->
+                <div class="lg:w-1/3">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4">Ваша запись</h3>
+                    <div class="bg-white p-6 rounded-lg shadow-sm sticky top-4">
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-gray-800 mb-2">Детали записи:</h4>
+                            <div id="booking-summary" class="text-gray-600">
+                                <p>Мастер: <span id="summary-master" class="text-pink-500">Не выбран</span></p>
+                                <p>Услуга: <span id="summary-service" class="text-pink-500">Не выбрана</span></p>
+                                <p>Дата: <span id="summary-date" class="text-pink-500">14.4.2025</span></p>
+                                <p>Время: <span id="summary-time" class="text-pink-500">Не выбрано</span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-gray-800 mb-2">Итого:</h4>
+                            <p class="text-2xl font-bold text-pink-500" id="summary-price">0 ₽</p>
+                        </div>
+                        
+                        <button id="confirm-booking" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-full shadow-lg transition duration-300 disabled:opacity-50" disabled="">
+                            Подтвердить запись
+                        </button>
+                        
+                        <div class="mt-4 text-xs text-gray-500">
+                            <p>Нажимая кнопку, вы соглашаетесь с условиями обработки персональных данных</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-hand-sparkles text-2xl text-pink-400"></i>
+                        <h2 class="text-xl font-bold">Nail Studio</h2>
+                    </div>
+                    <p class="text-gray-400">Профессиональный маникюрный салон с 2015 года</p>
+                </div>
+                
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-lg font-semibold mb-3">Контакты</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-map-marker-alt text-pink-400"></i>
+                            <span>г. Москва, ул. Примерная, 15</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-phone text-pink-400"></i>
+                            <span>+7 (123) 456-78-90</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-envelope text-pink-400"></i>
+                            <span>info@nailstudio.ru</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Часы работы</h3>
+                    <ul class="space-y-2">
+                        <li class="flex justify-between">
+                            <span>Пн-Пт:</span>
+                            <span>10:00 - 21:00</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Сб:</span>
+                            <span>10:00 - 20:00</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Вс:</span>
+                            <span>11:00 - 19:00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 Nail Studio. Все права защищены.</p>
+                <div class="flex space-x-4">
+                    <a href="https://enzostvs-deepsite.hf.space/#" class="text-gray-400 hover:text-pink-400">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="https://enzostvs-deepsite.hf.space/#" class="text-gray-400 hover:text-pink-400">
+                        <i class="fab fa-vk text-xl"></i>
+                    </a>
+                    <a href="https://enzostvs-deepsite.hf.space/#" class="text-gray-400 hover:text-pink-400">
+                        <i class="fab fa-telegram text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize calendar
+        document.addEventListener('DOMContentLoaded', function() {
+            initCalendar();
+            generateTimeSlots();
+            
+            // Add event listeners for master selection
+            document.querySelectorAll('.master-card').forEach(master => {
+                master.addEventListener('click', function() {
+                    document.querySelectorAll('.master-card').forEach(m => {
+                        m.classList.remove('border-pink-500', 'bg-pink-50');
+                    });
+                    this.classList.add('border-pink-500', 'bg-pink-50');
+                    
+                    const masterName = this.querySelector('h4').textContent;
+                    document.getElementById('summary-master').textContent = masterName;
+                    
+                    updateBookingSummary();
+                });
+            });
+            
+            // Add event listeners for service selection
+            document.querySelectorAll('.service-card').forEach(service => {
+                service.addEventListener('click', function() {
+                    document.querySelectorAll('.service-card').forEach(s => {
+                        s.classList.remove('border-pink-500', 'bg-pink-50');
+                    });
+                    this.classList.add('border-pink-500', 'bg-pink-50');
+                    
+                    const serviceName = this.querySelector('h4').textContent;
+                    const servicePrice = this.querySelector('span').textContent;
+                    
+                    document.getElementById('summary-service').textContent = serviceName;
+                    document.getElementById('summary-price').textContent = servicePrice;
+                    
+                    updateBookingSummary();
+                });
+            });
+            
+            // Add event listener for time slot selection
+            document.getElementById('time-slots').addEventListener('click', function(e) {
+                if (e.target.classList.contains('time-slot') && !e.target.classList.contains('booked') && !e.target.classList.contains('buffer')) {
+                    document.querySelectorAll('.time-slot').forEach(slot => {
+                        slot.classList.remove('bg-pink-500', 'text-white');
+                    });
+                    e.target.classList.add('bg-pink-500', 'text-white');
+                    
+                    document.getElementById('summary-time').textContent = e.target.textContent;
+                    updateBookingSummary();
+                }
+            });
+            
+            // Month navigation
+            document.getElementById('prev-month').addEventListener('click', function() {
+                // Implement month navigation logic
+                console.log('Previous month');
+            });
+            
+            document.getElementById('next-month').addEventListener('click', function() {
+                // Implement month navigation logic
+                console.log('Next month');
+            });
+            
+            // Confirm booking button
+            document.getElementById('confirm-booking').addEventListener('click', function() {
+                alert('Ваша запись успешно подтверждена! Мы ждем вас в салоне.');
+            });
+        });
+        
+        function initCalendar() {
+            const calendarDays = document.getElementById('calendar-days');
+            const today = new Date();
+            const currentDate = new Date();
+            const currentMonth = currentDate.getMonth();
+            const currentYear = currentDate.getFullYear();
+            
+            // Get first day of month
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            // Adjust for Monday as first day (0 = Sunday, 1 = Monday, etc.)
+            const firstDayIndex = firstDay === 0 ? 6 : firstDay - 1;
+            
+            // Get days in month
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            
+            // Get previous month days
+            const prevMonthDays = new Date(currentYear, currentMonth, 0).getDate();
+            
+            // Clear calendar
+            calendarDays.innerHTML = '';
+            
+            // Previous month days (disabled)
+            for (let i = firstDayIndex; i > 0; i--) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day text-center py-2 text-gray-400 disabled';
+                day.textContent = prevMonthDays - i + 1;
+                calendarDays.appendChild(day);
+            }
+            
+            // Current month days
+            for (let i = 1; i <= daysInMonth; i++) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day text-center py-2 cursor-pointer rounded-full';
+                day.textContent = i;
+                
+                // Create date object for this day
+                const dayDate = new Date(currentYear, currentMonth, i);
+                
+                // Highlight today
+                if (i === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear()) {
+                    day.classList.add('bg-pink-100', 'font-semibold');
+                }
+                
+                // Disable past days
+                if (dayDate < today) {
+                    day.classList.add('text-gray-400', 'disabled');
+                    day.classList.remove('cursor-pointer');
+                }
+                
+                // Add click event only for future days
+                if (dayDate >= today) {
+                    day.addEventListener('click', function() {
+                        // Remove selection from other days
+                        document.querySelectorAll('.calendar-day').forEach(d => {
+                            d.classList.remove('bg-pink-500', 'text-white');
+                        });
+                        
+                        // Select this day
+                        this.classList.add('bg-pink-500', 'text-white');
+                        
+                        // Update selected date display
+                        const selectedDate = `${i}.${currentMonth + 1}.${currentYear}`;
+                        document.getElementById('selected-date').textContent = selectedDate;
+                        
+                        // Update booking summary
+                        updateBookingSummary();
+                        
+                        // Generate new time slots with buffer times
+                        generateTimeSlots();
+                    });
+                }
+                
+                calendarDays.appendChild(day);
+            }
+            
+            // Next month days (enabled)
+            const totalDays = firstDayIndex + daysInMonth;
+            const remainingDays = 7 - (totalDays % 7);
+            if (remainingDays < 7) {
+                for (let i = 1; i <= remainingDays; i++) {
+                    const day = document.createElement('div');
+                    day.className = 'calendar-day text-center py-2 cursor-pointer rounded-full';
+                    day.textContent = i;
+                    
+                    // Add click event for next month days
+                    day.addEventListener('click', function() {
+                        // Remove selection from other days
+                        document.querySelectorAll('.calendar-day').forEach(d => {
+                            d.classList.remove('bg-pink-500', 'text-white');
+                        });
+                        
+                        // Select this day
+                        this.classList.add('bg-pink-500', 'text-white');
+                        
+                        // Update selected date display (next month)
+                        const nextMonth = currentMonth + 1;
+                        const nextMonthYear = nextMonth > 11 ? currentYear + 1 : currentYear;
+                        const nextMonthAdjusted = nextMonth > 11 ? 0 : nextMonth;
+                        const selectedDate = `${i}.${nextMonthAdjusted + 1}.${nextMonthYear}`;
+                        document.getElementById('selected-date').textContent = selectedDate;
+                        
+                        // Update booking summary
+                        updateBookingSummary();
+                        
+                        // Generate new time slots with buffer times
+                        generateTimeSlots();
+                    });
+                    
+                    calendarDays.appendChild(day);
+                }
+            }
+            
+            // Select today by default if it's available
+            const todayElement = document.querySelectorAll('.calendar-day')[firstDayIndex + today.getDate() - 1];
+            if (todayElement && !todayElement.classList.contains('disabled')) {
+                todayElement.click();
+            } else {
+                // Find the first available future day
+                let firstAvailableDay = null;
+                document.querySelectorAll('.calendar-day').forEach(day => {
+                    if (!firstAvailableDay && !day.classList.contains('disabled') && day.textContent >= today.getDate()) {
+                        firstAvailableDay = day;
+                    }
+                });
+                
+                if (firstAvailableDay) {
+                    firstAvailableDay.click();
+                } else {
+                    // If no days available in current month, try next month
+                    const nextMonthDays = document.querySelectorAll('.calendar-day');
+                    for (let i = firstDayIndex + daysInMonth; i < nextMonthDays.length; i++) {
+                        if (!nextMonthDays[i].classList.contains('disabled')) {
+                            nextMonthDays[i].click();
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            // Update month display
+            const monthNames = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+            document.getElementById('current-month').textContent = `${monthNames[currentMonth]} ${currentYear}`;
+        }
+        
+        function generateTimeSlots() {
+            const timeSlotsContainer = document.getElementById('time-slots');
+            timeSlotsContainer.innerHTML = '';
+            
+            // Generate time slots from 10:00 to 20:00 every 30 minutes
+            for (let hour = 10; hour <= 20; hour++) {
+                for (let minute = 0; minute < 60; minute += 30) {
+                    if (hour === 20 && minute === 30) break; // Last slot at 20:00
+                    
+                    const timeSlot = document.createElement('div');
+                    timeSlot.className = 'time-slot text-center py-2 rounded border border-gray-200 cursor-pointer';
+                    
+                    // Format time (add leading zero)
+                    const formattedHour = hour.toString().padStart(2, '0');
+                    const formattedMinute = minute.toString().padStart(2, '0');
+                    timeSlot.textContent = `${formattedHour}:${formattedMinute}`;
+                    
+                    // Randomly mark some slots as booked (for demo)
+                    if (Math.random() < 0.2) {
+                        timeSlot.classList.add('booked', 'bg-gray-100', 'text-gray-400');
+                        timeSlot.classList.remove('cursor-pointer');
+                        timeSlot.innerHTML += '<div class="text-xs mt-1">Занято</div>';
+                    }
+                    
+                    // Add buffer time after booked slots
+                    if (Math.random() < 0.1 && !timeSlot.classList.contains('booked')) {
+                        timeSlot.classList.add('buffer', 'bg-yellow-50', 'text-gray-400');
+                        timeSlot.classList.remove('cursor-pointer');
+                        timeSlot.innerHTML += '<div class="text-xs mt-1">Перерыв</div>';
+                    }
+                    
+                    timeSlotsContainer.appendChild(timeSlot);
+                }
+            }
+        }
+        
+        function updateBookingSummary() {
+            const masterSelected = document.getElementById('summary-master').textContent !== 'Не выбран';
+            const serviceSelected = document.getElementById('summary-service').textContent !== 'Не выбрана';
+            const dateSelected = document.getElementById('summary-date').textContent !== 'Не выбрана';
+            const timeSelected = document.getElementById('summary-time').textContent !== 'Не выбрано';
+            
+            // Update summary date
+            document.getElementById('summary-date').textContent = document.getElementById('selected-date').textContent;
+            
+            // Enable/disable confirm button
+            const confirmButton = document.getElementById('confirm-booking');
+            if (masterSelected && serviceSelected && dateSelected && timeSelected) {
+                confirmButton.disabled = false;
+            } else {
+                confirmButton.disabled = true;
+            }
+        }
+    </script>
+
+</body></html>
